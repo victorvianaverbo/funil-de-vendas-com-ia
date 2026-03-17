@@ -37,11 +37,9 @@
             );
             min-height: 100dvh;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
             padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 6vw, 9rem);
             position: relative;
-            overflow-x: hidden;
         }
 
         /* Noise */
@@ -58,9 +56,11 @@
 
         .obrigado-content {
             max-width: 620px;
+            width: 100%;
             text-align: center;
             position: relative;
             z-index: 2;
+            margin: auto;
         }
 
         /* Linha gold animada — "nasce" antes do conteúdo */
