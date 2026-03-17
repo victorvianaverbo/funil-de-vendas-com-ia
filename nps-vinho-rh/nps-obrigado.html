@@ -184,7 +184,12 @@
 
         /* Reduced motion */
         @media (prefers-reduced-motion: reduce) {
-            .gold-line, .eyebrow, .headline, .texto, .cta-divisor, .cta-palco {
+            .eyebrow, .headline, .texto, .cta-divisor, .cta-palco {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+            .gold-line {
                 animation: none !important;
                 opacity: 1 !important;
                 transform: none !important;
