@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Como foi sua noite? | Vinho com RH</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300;1,9..144,400&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Scroll Progress Indicator — linha gold na borda esquerda -->
+    <div class="scroll-progress" aria-hidden="true">
+        <div class="scroll-progress-fill" id="scrollFill"></div>
+    </div>
+
+    <main>
+
+        <!-- ════════════════════════════════════════════
+             HERO — Type Hero
+             Arquétipo: Type Hero
+             Constraints: Noise Texture · Mixed Weights
+        ════════════════════════════════════════════ -->
+        <section class="hero">
+            <div class="noise" aria-hidden="true"></div>
+            <div class="hero-inner">
+                <span class="eyebrow">Vinho com RH</span>
+                <h1 class="headline">
+                    Como foi<br>
+                    <em>sua noite?</em>
+                </h1>
+                <p class="hero-sub">
+                    Sua opinião nos ajuda a elevar cada detalhe da próxima edição.<br>
+                    Leva menos de 2 minutos.
+                </p>
+            </div>
+        </section>
+
+        <form id="nps-form" novalidate>
+
+            <!-- ════════════════════════════════════════════
+                 SEÇÃO 1: IDENTIFICAÇÃO — Sparse
+                 Arquétipo: Sparse
+                 Constraints: Fade Up Stagger · Asymmetric Padding
+            ════════════════════════════════════════════ -->
+            <section class="sec-identificacao" id="sec-identificacao">
+                <div class="identificacao-wrap">
+                    <div class="identificacao-header js-fade-up" data-delay="0">
+                        <span class="sec-eyebrow">
+                            Identificação
+                            <span class="opcional">(opcional)</span>
+                        </span>
+                        <p class="sec-desc">Não é obrigatório, mas nos ajuda a personalizar o acompanhamento.</p>
+                    </div>
+                    <div class="identificacao-grid">
+                        <div class="campo-wrap js-fade-up" data-delay="0">
+                            <label class="campo-label" for="nome">Nome</label>
+                            <div class="campo-border-wrap">
+                                <input type="text" id="nome" name="nome" class="campo-input"
+                                    placeholder="Seu nome" autocomplete="name">
+                                <span class="campo-line" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="campo-wrap js-fade-up" data-delay="120">
+                            <label class="campo-label" for="empresa">Empresa</label>
+                            <div class="campo-border-wrap">
+                                <input type="text" id="empresa" name="empresa" class="campo-input"
+                                    placeholder="Sua empresa" autocomplete="organization">
+                                <span class="campo-line" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ════════════════════════════════════════════
+                 SEÇÃO 2: NPS 0-10 — Isolated Element
+                 Arquétipo: Isolated Element
+                 Constraints: Color Blocking · Hover Lift
+            ════════════════════════════════════════════ -->
+            <section class="sec-nps" id="sec-nps">
+                <div class="nps-card js-reveal">
+                    <span class="card-num" aria-hidden="true">01</span>
+                    <h2 class="nps-question">
+                        Em uma escala de 0 a 10, o quanto você recomendaria o
+                        <strong>Vinho com RH</strong>
+                        para um amigo ou colega profissional?
+                    </h2>
+                    <div class="scale-wrap">
+                        <div class="nps-scale" id="nps-scale"
+                            role="group" aria-label="Escala de 0 a 10"></div>
+                        <div class="scale-labels" aria-hidden="true">
+                            <span>Não recomendaria</span>
+                            <span>Com certeza recomendaria</span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="nps-value" name="nps_score">
+                </div>
+            </section>
+
+            <!-- ════════════════════════════════════════════
+                 SEÇÃO 3: AVALIAÇÕES — Scroll Storytelling
+                 Arquétipo: Scroll Storytelling
+                 Constraints: Glassmorphism · Stagger Wave · Hover Glow
+            ════════════════════════════════════════════ -->
+            <section class="sec-avaliacoes" id="sec-avaliacoes">
+                <div class="noise" aria-hidden="true"></div>
+                <div class="avaliacoes-wrap">
+                    <div class="avaliacoes-header js-reveal-dark">
+                        <h2 class="avaliacoes-titulo">Avalie cada momento do evento</h2>
+                        <p class="avaliacoes-sub">Selecione de 1 a 5 estrelas.</p>
+                    </div>
+                    <div class="avaliacoes-card">
+                        <div class="ratings-list">
+
+                            <div class="rating-row js-rating-row" data-delay="0">
+                                <span class="rating-label">Palestras</span>
+                                <div class="star-rating" data-field="nota_palestras"
+                                    role="group" aria-label="Avaliação de Palestras"></div>
+                                <input type="hidden" name="nota_palestras">
+                            </div>
+
+                            <div class="rating-row js-rating-row" data-delay="80">
+                                <span class="rating-label">Painelistas</span>
+                                <div class="star-rating" data-field="nota_painelistas"
+                                    role="group" aria-label="Avaliação de Painelistas"></div>
+                                <input type="hidden" name="nota_painelistas">
+                            </div>
+
+                            <div class="rating-row js-rating-row" data-delay="160">
+                                <span class="rating-label">Painel (debate)</span>
+                                <div class="star-rating" data-field="nota_painel"
+                                    role="group" aria-label="Avaliação do Painel"></div>
+                                <input type="hidden" name="nota_painel">
+                            </div>
+
+                            <div class="rating-row js-rating-row" data-delay="240">
+                                <span class="rating-label">Vinho</span>
+                                <div class="star-rating" data-field="nota_vinho"
+                                    role="group" aria-label="Avaliação do Vinho"></div>
+                                <input type="hidden" name="nota_vinho">
+                            </div>
+
+                            <div class="rating-row js-rating-row" data-delay="320">
+                                <span class="rating-label">Buffet</span>
+                                <div class="star-rating" data-field="nota_buffet"
+                                    role="group" aria-label="Avaliação do Buffet"></div>
+                                <input type="hidden" name="nota_buffet">
+                            </div>
+
+                            <div class="rating-row js-rating-row" data-delay="400">
+                                <span class="rating-label">Evento com Bruno Bettini</span>
+                                <div class="star-rating" data-field="nota_evento_geral"
+                                    role="group" aria-label="Avaliação do Evento com Bruno Bettini"></div>
+                                <input type="hidden" name="nota_evento_geral">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ════════════════════════════════════════════
+                 SEÇÃO 4: PERGUNTAS ABERTAS — Split Assimetrico
+                 Arquétipo: Split Assimetrico
+                 Constraints: Fade Left · Focus Glow
+            ════════════════════════════════════════════ -->
+            <section class="sec-perguntas" id="sec-perguntas">
+                <div class="perguntas-wrap">
+
+                    <div class="pergunta-bloco js-fade-left" data-delay="0">
+                        <span class="pergunta-num" aria-hidden="true">01</span>
+                        <div class="pergunta-conteudo">
+                            <label class="pergunta-label" for="ponto_positivo">
+                                O que mais marcou sua experiência?
+                            </label>
+                            <div class="textarea-wrap">
+                                <textarea id="ponto_positivo" name="ponto_positivo" rows="3"
+                                    class="pergunta-textarea"
+                                    placeholder="Compartilhe o que mais te surpreendeu ou encantou..."></textarea>
+                                <span class="textarea-line" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pergunta-bloco js-fade-left" data-delay="150">
+                        <span class="pergunta-num" aria-hidden="true">02</span>
+                        <div class="pergunta-conteudo">
+                            <label class="pergunta-label" for="ponto_melhoria">
+                                O que poderíamos fazer melhor na próxima edição?
+                            </label>
+                            <div class="textarea-wrap">
+                                <textarea id="ponto_melhoria" name="ponto_melhoria" rows="3"
+                                    class="pergunta-textarea"
+                                    placeholder="Qualquer detalhe conta — ambiente, conteúdo, logística..."></textarea>
+                                <span class="textarea-line" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ════════════════════════════════════════════
+                 SEÇÃO 5: SUBMIT — Isolated Element
+                 Arquétipo: Isolated Element + Container Narrow
+                 Constraints: Hover Fill · Gradiente Linear
+            ════════════════════════════════════════════ -->
+            <section class="sec-submit" id="sec-submit">
+                <div class="submit-wrap">
+                    <div class="form-feedback" id="form-feedback" role="alert" aria-live="polite"></div>
+                    <div class="btn-outer-wrap">
+                        <button type="submit" class="btn-submit" id="btn-submit">
+                            <svg class="btn-spinner" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"
+                                    stroke="currentColor" stroke-width="2.5"
+                                    stroke-dasharray="44" stroke-dashoffset="33"
+                                    stroke-linecap="round"/>
+                            </svg>
+                            <span class="btn-text">Enviar avaliação</span>
+                        </button>
+                        <span class="btn-gold-line" aria-hidden="true"></span>
+                    </div>
+                    <p class="submit-disclaimer">
+                        Seus dados são utilizados apenas para melhorar o evento.
+                    </p>
+                </div>
+            </section>
+
+        </form>
+    </main>
+
+    <script src="nps.js" defer></script>
+</body>
+
+</html>
