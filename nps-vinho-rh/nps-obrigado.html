@@ -12,12 +12,9 @@
 
     <style>
         :root {
-            --wine:        #5c1a1a;
-            --wine-dark:   #1f0808;
-            --wine-deeper: #0d0303;
-            --gold:        #c8a857;
-            --f-display:   'Fraunces', serif;
-            --f-body:      'Outfit', sans-serif;
+            --gold: #c8a857;
+            --f-display: 'Fraunces', serif;
+            --f-body: 'Outfit', sans-serif;
         }
 
         *, *::before, *::after {
@@ -27,20 +24,26 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /*
+         * REGRA: body é block puro — sem flex, sem grid.
+         * Centramento horizontal feito exclusivamente por margin: 0 auto no .page-wrap.
+         * Isso garante que .page-wrap e seus filhos ocupem largura correta em todos
+         * os browsers, incluindo iOS Safari com prefers-reduced-motion ativo.
+         */
         body {
             font-family: var(--f-body);
             background: radial-gradient(
                 ellipse at 30% 65%,
                 #4a1010 0%,
                 #200808 45%,
-                var(--wine-deeper) 100%
+                #0d0303 100%
             );
             min-height: 100dvh;
-            padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 6vw, 9rem);
+            padding: clamp(3.5rem, 10vw, 6rem) clamp(1.5rem, 5vw, 3rem);
             position: relative;
         }
 
-        /* Noise */
+        /* Noise — fixed para cobrir viewport mesmo com scroll */
         body::before {
             content: '';
             position: fixed;
@@ -50,52 +53,47 @@
             opacity: 0.045;
             pointer-events: none;
             mix-blend-mode: overlay;
+            z-index: 0;
         }
 
-        .obrigado-content {
-            max-width: 620px;
+        /* Container central — block com margin: 0 auto */
+        .page-wrap {
+            max-width: 560px;
+            margin: 0 auto;
             text-align: center;
             position: relative;
-            z-index: 2;
-            margin: 0 auto;
+            z-index: 1;
         }
 
-        /* Linha gold animada — "nasce" antes do conteúdo */
+        /* Linha gold */
         .gold-line {
+            display: block;
             width: 0;
             height: 1.5px;
             background: var(--gold);
-            margin: 0 auto 3rem;
+            margin: 0 auto 2.5rem;
+            opacity: 0;
         }
 
+        /* Eyebrow — display: block (não inline-flex) para evitar shrink-wrap */
         .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.875rem;
+            display: block;
             font-family: var(--f-body);
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             font-weight: 600;
-            letter-spacing: 0.32em;
+            letter-spacing: 0.28em;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 2rem;
+            margin-bottom: 1.75rem;
             opacity: 0;
-            transform: translateY(16px);
+            transform: translateY(12px);
+            white-space: nowrap;
         }
 
-        .eyebrow::before,
-        .eyebrow::after {
-            content: '';
-            display: inline-block;
-            width: 1.75rem;
-            height: 1px;
-            background: var(--gold);
-            opacity: 0.55;
-        }
-
+        /* Headline */
         .headline {
             font-family: var(--f-display);
-            font-size: clamp(2.25rem, 6vw, 4rem);
+            font-size: clamp(2rem, 7vw, 3.5rem);
             font-weight: 700;
             font-optical-sizing: auto;
             color: #ffffff;
@@ -103,104 +101,122 @@
             letter-spacing: -0.02em;
             margin-bottom: 1.5rem;
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(16px);
         }
 
         .headline .gold {
             color: var(--gold);
         }
 
+        /*
+         * Parágrafo — SEM max-width próprio e SEM margin: auto.
+         * O .page-wrap já limita a largura. Aqui o elemento preenche
+         * 100% do pai (block flow), garantindo largura correta em qualquer tela.
+         */
         .texto {
             font-family: var(--f-body);
-            font-size: clamp(1rem, 2vw, 1.1rem);
+            font-size: clamp(0.95rem, 3vw, 1.05rem);
             font-weight: 300;
-            color: rgba(255, 255, 255, 0.65);
-            line-height: 1.8;
-            max-width: 480px;
-            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.62);
+            line-height: 1.85;
             opacity: 0;
-            transform: translateY(16px);
+            transform: translateY(12px);
         }
 
-        /* Divisor */
-        .cta-divisor {
+        /* Divisor vertical */
+        .divisor {
+            display: block;
             width: 1px;
             height: 48px;
-            background: rgba(200, 168, 87, 0.25);
-            margin: 2.5rem auto;
+            background: rgba(200, 168, 87, 0.3);
+            margin: 2.25rem auto;
             opacity: 0;
             transform: scaleY(0);
             transform-origin: top;
         }
 
-        /* CTA Palco */
-        .cta-palco {
+        /* CTA container */
+        .cta {
             opacity: 0;
-            transform: translateY(16px);
+            transform: translateY(12px);
         }
 
-        .cta-palco-texto {
-            font-family: 'Fraunces', serif;
-            font-size: clamp(1.25rem, 3vw, 1.75rem);
+        /* Texto CTA — Fraunces italic */
+        .cta-texto {
+            font-family: var(--f-display);
+            font-size: clamp(1.1rem, 4vw, 1.6rem);
             font-weight: 300;
-            font-optical-sizing: auto;
             font-style: italic;
+            font-optical-sizing: auto;
             color: rgba(255, 255, 255, 0.9);
-            line-height: 1.4;
+            line-height: 1.45;
             margin-bottom: 1.5rem;
         }
 
-        .cta-palco-link {
+        /* Botão CTA */
+        .cta-btn {
             display: inline-block;
             font-family: var(--f-body);
-            font-size: 0.82rem;
+            font-size: 0.78rem;
             font-weight: 600;
             letter-spacing: 0.2em;
             text-transform: uppercase;
             color: var(--gold);
             text-decoration: none;
-            border: 1px solid rgba(200, 168, 87, 0.35);
-            border-radius: 4px;
+            border: 1px solid rgba(200, 168, 87, 0.4);
+            border-radius: 3px;
             padding: 0.75rem 1.75rem;
             transition:
                 background 0.25s ease,
                 border-color 0.25s ease,
-                color 0.25s ease,
                 transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .cta-palco-link:hover {
+        .cta-btn:hover {
             background: rgba(200, 168, 87, 0.1);
             border-color: var(--gold);
             transform: translateY(-2px);
         }
 
-        @media (max-width: 480px) {
+        .cta-btn:focus-visible {
+            outline: 2px solid var(--gold);
+            outline-offset: 4px;
+        }
+
+        /* Mobile: letter-spacing menor no eyebrow */
+        @media (max-width: 640px) {
             .eyebrow {
-                white-space: nowrap;
-                letter-spacing: 0.15em;
+                letter-spacing: 0.18em;
             }
         }
 
-        /* Reduced motion */
+        /*
+         * CRÍTICO: prefers-reduced-motion NÃO aplica width a elementos de texto.
+         * Apenas .gold-line recebe width: 64px aqui.
+         * Aplicar width em .texto, .headline etc. quebraria o layout em iPhones
+         * com "Reduzir Movimento" ativo (Configurações → Acessibilidade → Movimento).
+         */
         @media (prefers-reduced-motion: reduce) {
-            .eyebrow, .headline, .texto, .cta-divisor, .cta-palco {
-                animation: none !important;
+            .eyebrow,
+            .headline,
+            .texto,
+            .divisor,
+            .cta {
                 opacity: 1 !important;
                 transform: none !important;
             }
+
             .gold-line {
-                animation: none !important;
                 opacity: 1 !important;
                 transform: none !important;
-                width: 80px !important;
+                width: 64px !important;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="obrigado-content">
+    <div class="page-wrap">
         <div class="gold-line" id="goldLine"></div>
         <span class="eyebrow" id="eyebrow">Vinho com RH</span>
         <h1 class="headline" id="headline">
@@ -211,64 +227,69 @@
             em conta para tornar a próxima edição ainda mais especial. Até breve.
         </p>
 
-        <div class="cta-divisor" id="ctaDivisor"></div>
+        <div class="divisor" id="divisor"></div>
 
-        <div class="cta-palco" id="ctaPalco">
-            <p class="cta-palco-texto">
+        <div class="cta" id="cta">
+            <p class="cta-texto">
                 Gostaria de ser painelista ou palestrante no próximo evento?
             </p>
-            <a href="https://vinho-rh.netlify.app/" class="cta-palco-link" id="ctaLink">
+            <a href="https://vinho-rh.netlify.app/" class="cta-btn">
                 Faça sua aplicação
             </a>
         </div>
     </div>
 
     <script>
-        // Personaliza com nome se disponível
+        // Personaliza headline com nome via URL ?nome=
         const nome = new URLSearchParams(location.search).get('nome');
         if (nome) {
             document.getElementById('headline').innerHTML =
                 `<span class="gold">${nome}</span>, obrigado pelo seu <span class="gold">feedback!</span>`;
         }
 
-        // Stagger reveal: linha → eyebrow → headline → texto
-        function animate(el, props, duration, delay) {
+        // Stagger reveal — JS puro, sem bibliotecas
+        // Cada elemento: opacity 0→1 + translateY X→0
+        function fadeUp(el, duration, delay) {
             setTimeout(() => {
-                Object.assign(el.style, {
-                    transition: `opacity ${duration}ms cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform ${duration}ms cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
-                    ...props
-                });
-            }, 50);
+                el.style.transition = [
+                    `opacity ${duration}ms cubic-bezier(0.16,1,0.3,1)`,
+                    `transform ${duration}ms cubic-bezier(0.16,1,0.3,1)`
+                ].join(', ');
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }, delay);
         }
 
-        // 1. Linha gold cresce (800ms, delay 0)
-        const line = document.getElementById('goldLine');
-        line.style.transition = 'width 800ms ease-out';
-        setTimeout(() => { line.style.width = '80px'; }, 50);
-
-        // 2. Eyebrow (600ms, delay 400ms)
-        const eyebrow = document.getElementById('eyebrow');
-        animate(eyebrow, { opacity: '1', transform: 'translateY(0)' }, 600, 400);
-
-        // 3. Headline (700ms, delay 600ms)
-        const headline = document.getElementById('headline');
-        animate(headline, { opacity: '1', transform: 'translateY(0)' }, 700, 600);
-
-        // 4. Texto (600ms, delay 800ms)
-        const texto = document.getElementById('texto');
-        animate(texto, { opacity: '1', transform: 'translateY(0)' }, 600, 800);
-
-        // 5. Divisor (400ms, delay 1100ms)
-        const divisor = document.getElementById('ctaDivisor');
+        // 1. Linha gold — cresce em largura + aparece
+        const goldLine = document.getElementById('goldLine');
         setTimeout(() => {
-            divisor.style.transition = 'opacity 400ms ease, transform 600ms cubic-bezier(0.16,1,0.3,1)';
+            goldLine.style.transition = 'width 700ms ease-out, opacity 400ms ease';
+            goldLine.style.opacity = '1';
+            goldLine.style.width = '64px';
+        }, 50);
+
+        // 2. Eyebrow — delay 300ms
+        fadeUp(document.getElementById('eyebrow'), 600, 300);
+
+        // 3. Headline — delay 500ms
+        fadeUp(document.getElementById('headline'), 700, 500);
+
+        // 4. Parágrafo — delay 700ms
+        fadeUp(document.getElementById('texto'), 600, 700);
+
+        // 5. Divisor — scaleY 0→1, delay 1000ms
+        const divisor = document.getElementById('divisor');
+        setTimeout(() => {
+            divisor.style.transition = [
+                'opacity 400ms ease',
+                'transform 500ms cubic-bezier(0.16,1,0.3,1)'
+            ].join(', ');
             divisor.style.opacity = '1';
             divisor.style.transform = 'scaleY(1)';
-        }, 1100);
+        }, 1000);
 
-        // 6. CTA Palco (600ms, delay 1350ms)
-        const ctaPalco = document.getElementById('ctaPalco');
-        animate(ctaPalco, { opacity: '1', transform: 'translateY(0)' }, 600, 1350);
+        // 6. CTA — delay 1200ms
+        fadeUp(document.getElementById('cta'), 600, 1200);
     </script>
 </body>
 
